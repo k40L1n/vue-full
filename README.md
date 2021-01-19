@@ -1,5 +1,5 @@
 # vue3
-
+# vue, tailwind 
 ## Project setup
 ```
 npm install
