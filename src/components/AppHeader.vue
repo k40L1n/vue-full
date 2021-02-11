@@ -8,10 +8,13 @@
       >{{ item.title }}</router-link
     >
     <button class="mx-2" @click="$emit('open-login-modal')">Login</button>
+    <button class="mx-2" @click="logout">Logout</button>
   </nav>
 </template>
 
 <script>
+import firebase from "/utility/mixins/firebase";
+
 export default {
   data() {
     return {
@@ -23,6 +26,11 @@ export default {
         { title: "Slider", to: "/slider" },
       ],
     };
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut();
+    },
   },
 };
 </script>
