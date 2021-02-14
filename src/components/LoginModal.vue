@@ -12,6 +12,7 @@
             <div clas="my-4">
               <label>Email</label>
               <input
+                ref="emailRef"
                 v-model="email"
                 type="text"
                 class="rounded shadow p-2 w-full"
@@ -54,6 +55,9 @@ export default {
       password: "poppins",
       isLoading: false,
     };
+  },
+  mounted(){
+    this.$refs.emailRef.focus();
   },
   methods: {
     submit() {

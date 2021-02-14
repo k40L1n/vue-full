@@ -10,7 +10,7 @@
       </li>
     </ul>
     <form @submit.prevent="addHero">
-      <input type="text" class="border rounded-md" v-model="hero" />
+      <input type="text" class="border rounded-md" v-model="hero" ref="newHeroRef" />
       <button
         class="bg-indigo-600 hover:bg-indigo-600 px-3 py-1 rounded-md text-white"
         type="submit"
@@ -33,6 +33,9 @@ export default {
         { name: "KOTL" },
       ],
     };
+  },
+  mounted(){
+    this.$refs.newHeroRef.focus();
   },
   methods: {
     addHero() {
