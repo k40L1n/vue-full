@@ -71,8 +71,7 @@ export default {
           this.isLoading = false;
           this.close();
         })
-        .catch((e) => {
-          console.log(e);
+        .catch(() => {
           this.isLoading = false;
         });
     },
