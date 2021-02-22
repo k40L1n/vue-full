@@ -27,6 +27,7 @@ export default {
         this.authUser = user;
       } else {
         this.isLoginOpen = false;
+        this.isLoggedIn = false;
         this.authUser = [];
       }
     });

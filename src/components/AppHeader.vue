@@ -18,7 +18,7 @@
 import firebase from "/utility/mixins/firebase";
 
 export default {
-  props: { isLoggedIn: { type: Boolean, required: true } },
+  props: { isLoggedIn: { required: true } },
   data() {
     return {
       list: [

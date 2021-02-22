@@ -7,7 +7,9 @@
     <div class="flex h-full">
       <div class="z-30 m-auto bg-white p-2 rounded shadow w-1/3">
         <div class="p-2 border">
-          <h1 class="text-xl mb-10 text-center">Login Portal</h1>
+          <h1 class="text-xl mb-2 text-center">Login Portal</h1>
+          <GoogleLogin />
+          <p class="text-center">OR</p>
           <form class="p-2 my-2" @submit.prevent="submit">
             <div clas="my-4">
               <label>Email</label>
@@ -46,8 +48,10 @@
 
 <script>
 import firebase from "/utility/mixins/firebase";
+import GoogleLogin from "../components/Login/GoogleLogin";
 
 export default {
+  components: { GoogleLogin },
   emits: ["close-login"],
   data() {
     return {
@@ -56,7 +60,7 @@ export default {
       isLoading: false,
     };
   },
-  mounted(){
+  mounted() {
     this.$refs.emailRef.focus();
   },
   methods: {
@@ -77,6 +81,15 @@ export default {
     },
     close() {
       this.$emit("close-login");
+    },
+    loginWithGoogle() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(() => {
+          this.close();
+        });
     },
   },
 };
