@@ -10,7 +10,12 @@
       </li>
     </ul>
     <form @submit.prevent="addHero">
-      <input type="text" class="border rounded-md" v-model="hero" ref="newHeroRef" />
+      <input
+        type="text"
+        class="border rounded-md"
+        v-model="hero"
+        ref="newHeroRef"
+      />
       <button
         class="bg-indigo-600 hover:bg-indigo-600 px-3 py-1 rounded-md text-white"
         type="submit"
@@ -22,33 +27,32 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
 export default {
-  data() {
-    return {
-      hero: "",
-      heroes: [
-        { name: "Earth Spirit" },
-        { name: "Earth Shaker" },
-        { name: "Witch Doctor" },
-        { name: "KOTL" },
-      ],
-    };
-  },
-  mounted(){
-    this.$refs.newHeroRef.focus();
-  },
-  methods: {
-    addHero() {
-      if (this.hero !== "") {
-        this.heroes.push({ name: this.hero });
-        this.hero = "";
+  setup() {
+    const newHeroRef = ref("");
+    const hero = ref("");
+    const heroes = ref([
+      { name: "Earth Spirit" },
+      { name: "Earth Shaker" },
+      { name: "Witch Doctor" },
+      { name: "KOTL" },
+    ]);
+    onMounted(() => {
+      newHeroRef.value.focus();
+    });
+    function remove(index) {
+      heroes.value = heroes.value.filter((hero, i) => i !== index);
+    }
+
+    function addHero() {
+      if (hero.value !== "") {
+        heroes.value.push({ name: hero.value });
+        hero.value = "";
       }
-    },
-    remove(index) {
-      this.heroes = this.heroes.filter((hero, i) => i !== index);
-    },
+    }
+
+    return { heroes, hero, remove, addHero, newHeroRef };
   },
 };
 </script>
-
-<style></style>
