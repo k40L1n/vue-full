@@ -1,6 +1,6 @@
 <template>
   <div class="shadow max-w-sm rounded-md ml-5">
-    <h1 class="text-3xl">Heroes</h1>
+    <h1 class="text-3xl">Heroes - {{ heroesCount }} </h1>
     <ul class="">
       <li class="flex" v-for="(hero, key) in heroes" :key="key">
         {{ hero.name }}
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 export default {
   setup() {
     const newHeroRef = ref("");
@@ -41,6 +41,11 @@ export default {
     onMounted(() => {
       newHeroRef.value.focus();
     });
+
+    const heroesCount = computed({
+      get: () => heroes.value.length
+    });
+    
     function remove(index) {
       heroes.value = heroes.value.filter((hero, i) => i !== index);
     }
@@ -52,7 +57,7 @@ export default {
       }
     }
 
-    return { heroes, hero, remove, addHero, newHeroRef };
+    return { heroes, hero, remove, addHero, newHeroRef ,heroesCount};
   },
 };
 </script>
