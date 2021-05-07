@@ -47,7 +47,7 @@ export default {
              currentNum.value = currentNum.value + value;
         }
         function applyOperation(value){
-            calculate();
+            calculate(); 
             prevNum.value = currentNum.value;
             currentNum.value = '';
             selectedOperation.value  = value;
